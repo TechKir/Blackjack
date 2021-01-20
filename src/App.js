@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import BjHeader from './components/BjHeader';
+import GameArea from './components/GameArea';
+import ScoresNRoundsBox from './components/ScoresNRoundsBox';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BjHeader/>
+      <div className='gameContainer'>
+        <GameArea/>
+        <ScoresNRoundsBox/>
+      </div>
     </div>
   );
 }

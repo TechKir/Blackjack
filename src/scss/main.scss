@@ -1,0 +1,183 @@
+////Settings////
+
+//colors:
+$headersAndBtn:white;
+$fontsAndBorders:black;
+
+//variable styles:
+$borderStyle:2px solid $fontsAndBorders;
+
+//mixins:
+@mixin flexCentering {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+@mixin flexSpaceAround {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+////End////
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Bevan', cursive;
+}
+
+body {
+    font-size: 1vw;
+}
+
+.App {
+    background-image: url('../assets/70-706654_ornamental-background.jpg');
+    background-size: cover;
+    background-repeat: repeat;
+    background-size: 100px 100px;
+}
+
+button {
+    background-color: $headersAndBtn;
+}
+
+.titleHeader {
+    @include flexCentering();
+    height: 3.5vw;
+    border-bottom: $borderStyle;
+    border-top: $borderStyle;
+    background-color: $headersAndBtn;
+
+    h1,
+    h2 {
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.backgroundCorrect {
+    background-image: url('../assets/70-706654_ornamental-background.jpg');
+    background-size: cover;
+    background-repeat: repeat;
+    background-size: 100px 100px;
+    border: none;
+}
+
+.gameContainer {
+    display: flex;
+}
+
+.gameArea {
+    width: 80vw;
+}
+
+.scoresNRoundsBox {
+    width: 20vw;
+    border-left: $borderStyle;
+}
+
+.roundContainer {
+    height: 40vh;
+}
+
+.scoresContainer {
+    height: 56vh;
+}
+
+.crupierCardsBox {
+    @include flexCentering();
+    height: 30vh;
+
+    :last-child {
+        img {
+            opacity: 0%;
+        }
+    }
+}
+
+.startBtnBox {
+    @include flexCentering();
+    height: 10vh;
+}
+
+.startBtn {
+    height: 5vh;
+    width: 30vw;
+    margin: 0 auto;
+    display: block;
+}
+
+.yourCardsBox {
+    @include flexCentering();
+    height: 30vh;
+}
+
+.table {
+    background-image: url("../assets/poker-table-felt-background-green-color-seamless-square-texture-tile-ready-high-resolution-photo-153047970.jpg");
+    background-repeat: repeat;
+    background-size: 50px 50px;
+}
+
+.actionBtn {
+    width: 24vw;
+    height: 5vh;
+}
+
+.actionBtnBox {
+    @include flexSpaceAround();
+    height: 7vh;
+}
+
+.infosBox {
+    @include flexSpaceAround();
+}
+
+.card {
+    width: 10vw;
+    height: 14vw;
+}
+
+.cardContainer {
+    width: 10vw;
+    height: 14vw;
+    margin: 0 1vw;
+    border-radius: 0.8vw;
+    background-image: url('../assets/card_back.png');
+    background-size: cover;
+}
+
+@media screen and(min-width:1540px) {
+    body {
+        font-size: 0.8vw;
+    }
+
+    .titleHeader {
+        height: 3vw;
+    }
+
+    .cardContainer {
+        width: 9vw;
+        height: 12vw;
+    }
+
+    .card {
+        width: 9vw;
+        height: 12vw;
+    }
+
+    button {
+        height: 4vw;
+    }
+
+    .actionBtn {
+        height: 4.5vh;
+    }
+
+    .startBtn {
+        height: 4.5vh;
+    }
+}
