@@ -99,6 +99,14 @@ button {
     }
 }
 
+.crupierCardsBoxVisible{
+    :last-child {
+        img {
+            opacity: 100%;
+        }
+    }
+}
+
 .startBtnBox {
     @include flexCentering();
     height: 10vh;

@@ -3,7 +3,7 @@ import GameHeader from './GameHeader';
 const ScoresContainer = () => {
     return (
         <div className='scoresContainer'>
-            <GameHeader title='Score'/>       
+            <GameHeader title='Scores'/>       
         </div>
     )
 };
