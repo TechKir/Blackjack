@@ -6,4 +6,4 @@ const BjHeader = () => {
     )
 };
 
-export default BjHeader
+export default BjHeader;

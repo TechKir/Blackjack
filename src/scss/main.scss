@@ -41,6 +41,19 @@ body {
     background-size: 100px 100px;
 }
 
+.row{
+    display: block;
+    background-color: $headersAndBtn;
+    border-bottom: $borderStyle;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.resetHistoryBtn{
+    width: 20vw;
+    height: 5vh;
+}
+
 button {
     background-color: $headersAndBtn;
 }
@@ -142,6 +155,9 @@ button {
 
 .infosBox {
     @include flexSpaceAround();
+    background-color: $headersAndBtn;
+    border-bottom: $borderStyle;
+    border-top: $borderStyle;
 }
 
 .card {

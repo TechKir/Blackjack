@@ -1,4 +1,3 @@
-
 const GameHeader = ({title}) => {
     return (
         <div className='titleHeader'>
@@ -7,4 +6,4 @@ const GameHeader = ({title}) => {
     )
 }
 
-export default GameHeader
+export default GameHeader;
