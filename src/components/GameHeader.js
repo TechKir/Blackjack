@@ -4,6 +4,6 @@ const GameHeader = ({title}) => {
             <h2>{title}</h2>
         </div>
     )
-}
+};
 
 export default GameHeader;
