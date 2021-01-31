@@ -1,3 +1,11 @@
+# <h1>Setup on your machine (requirements : installed Node.js) </h1>
+1. Clone repository,<br>
+2. On your terminal use commend: npm i,<br>
+3. and then: npm start
+
+# <h2>Live preview: </h2>
+https://sharp-poincare-e6ceee.netlify.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
