@@ -107,7 +107,7 @@ button {
 
     :last-child {
         img {
-            opacity: 0%;
+            opacity: 0;
         }
     }
 }
@@ -115,7 +115,7 @@ button {
 .crupierCardsBoxVisible{
     :last-child {
         img {
-            opacity: 100%;
+            opacity: 1;
         }
     }
 }

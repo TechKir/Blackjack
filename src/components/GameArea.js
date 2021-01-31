@@ -21,41 +21,27 @@ const GameArea = () => {
 
     //COUNT VALUES MODULE FUNCTION:
     const countValues = (playerOrCroupierCards) => {
-        //First we push each cards without AS and sort array. It is necessery to set AS value:
         let valuesArray = [];
-        const cardsWitoutAS = [];
         const cards = JSON.parse(ls.getItem(playerOrCroupierCards));
 
         cards.forEach( element => {
             if(element.value==='ACE'){
-                //DO NOTHING
+                valuesArray.push(1);
             } else if( element.value==='KING'|| element.value==='QUEEN' || element.value==='JACK'){
-                cardsWitoutAS.push(10);
+                valuesArray.push(10);
             } else {
-                cardsWitoutAS.push(parseInt(element.value));
+                valuesArray.push(parseInt(element.value));
             };
         });
 
-        const sortedCards = cardsWitoutAS.sort((a, b) => a - b);
-        sortedCards.forEach( element => valuesArray.push(element));
-        //If array is empty we want to result be 0
-        const firstSumming = sortedCards.length>0 ? sortedCards.reduce((prev, curr) => prev+curr) : 0;
-        //End without ACE//
+        const aceExistance = valuesArray.filter( e => e===1);
+        let sum = valuesArray.reduce((prev, curr) => prev+curr);
 
-        cards.forEach( element => {
-            //Check firstSumming value to set AS value: 1 or 11:
-            if(element.value==='ACE'){
-                if(firstSumming>=11){
-                    valuesArray.push(1)
-                } else if(firstSumming<11){
-                    valuesArray.push(11)
-                }
-            };
-        });
+        if(sum<12 && aceExistance.length>0){
+            sum=sum+10
+        }
 
-        const finalSumming = valuesArray.reduce((prev, curr) => prev+curr);
-        valuesArray = [];
-        return finalSumming
+        return sum;
     };
 
     //SAVE ROUNDS HISTORY MODULE FUNCTION:
@@ -230,6 +216,9 @@ const GameArea = () => {
         //Count who is winner: TODO: refactoring:
         const croupierResult = countValues('crupierCards');
         const playerResult = countValues('playerCards');
+        console.log('croupierResult',croupierResult)
+        console.log('playerResult',playerResult)
+
         if(croupierResult===playerResult){
             setLeftCash(leftCash+bet);
             setIsWin(null);
@@ -279,6 +268,7 @@ const GameArea = () => {
         }
 
         const playerResult = countValues('playerCards');
+
         if (playerResult>21){
             setIsWin(false);
             setIsPlay(false);      

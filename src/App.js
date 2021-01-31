@@ -7,7 +7,12 @@ export const AuthContext = createContext(null);
 function App() {
   const ls = window.localStorage;
 
-  const [leftCash,setLeftCash]=useState(JSON.parse(ls.getItem('leftCash')) || ls.setItem('leftCash',1000));
+  //STARTING CASH:
+  if(ls.getItem('leftCash')===null){
+    ls.setItem('leftCash',1000)
+  }
+
+  const [leftCash,setLeftCash]=useState(JSON.parse(ls.getItem('leftCash')) || 1000);
   const [bet,setBet]=useState(JSON.parse(ls.getItem('bet')));
   const [isPlay,setIsPlay]=useState(JSON.parse(ls.getItem('isPlay')));
   const [round,setRound]=useState(JSON.parse(ls.getItem('rounds')));
