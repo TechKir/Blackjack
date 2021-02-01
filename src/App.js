@@ -21,11 +21,6 @@ function App() {
   const [isScoreReset,setIsScoreReset]=useState(false);
   const [rerender,setRerender]=useState(false);
 
-  //Task requirement - "The game saves when the tab/window is closed and a prompt appears to inform the player about this."
-  //You can't make custom message in a new browsers by:
-  // window.beforeunload = () => ' some text ';
-  //Instead i show window when player finish a game or try to set mouse on to the top header by escapeAlert() fn. 
-
   return (
     <AuthContext.Provider 
     value={{leftCash, setLeftCash, bet, setBet, isPlay, setIsPlay, round, setRound, doubleDown, setDoubleDown, isWin, setIsWin, isScoreReset, setIsScoreReset, rerender, setRerender}}>

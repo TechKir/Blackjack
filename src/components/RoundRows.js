@@ -1,5 +1,5 @@
-import React,{useContext} from 'react';
-import {AuthContext} from '../App';
+//import React,{useContext} from 'react';
+//import {AuthContext} from '../App';
 
 const RoundRows = () => {
     const ls = window.localStorage;
@@ -8,11 +8,11 @@ const RoundRows = () => {
 
     const handleResult = (testIsWin,bet) => {
         if(testIsWin===null){
-            return 'Draw'
+            return 'draw'
         } else if(!testIsWin){
-            return `Player lose ${bet}`
+            return `player lose ${bet}`
         } else if(testIsWin){
-            return `Player win ${bet*0.5}`
+            return `player win ${bet*0.5}`
         }
     };
 
@@ -20,7 +20,7 @@ const RoundRows = () => {
         <>
             {
                 JSON.parse(ls.getItem('roundsHistory'))?.map( e => 
-                <strong key={Math.random().toString(16)} className='row'>Round-{e.round}<br></br>  Player: {e.playerCards.map(v=>`${v} `.toLowerCase())} vs Croupier  {e.croupierCards?.map(v=>`${v} `.toLowerCase())} <br></br> {handleResult(e.isWin,e.bet)} </strong>)
+                <strong key={Math.random().toString(16)} className='row'>Round-{e.round}: {handleResult(e.isWin,e.bet)}<br></br> Player: {e.playerCards.join(', ').toLowerCase()} <br/> Croupier: {e.croupierCards?.join(', ').toLowerCase()}</strong>)
             }
         </>
     )

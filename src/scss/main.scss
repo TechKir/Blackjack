@@ -3,6 +3,7 @@
 //colors:
 $headersAndBtn:white;
 $fontsAndBorders:black;
+$rows: #EEEEEE;
 
 //variable styles:
 $borderStyle:2px solid $fontsAndBorders;
@@ -43,15 +44,20 @@ body {
 
 .row{
     display: block;
-    background-color: $headersAndBtn;
+    background-color: $rows;
     border-bottom: $borderStyle;
     line-height: 1.3;
     text-align: center;
+    word-spacing: 0.1vw;
+    font-weight: 300;
+    font-size: 0.85em;
+    padding: 0.1vw;
 }
 
 .resetHistoryBtn{
     width: 20vw;
     height: 5vh;
+    font-size: 0.8vw;
 }
 
 button {
@@ -60,7 +66,7 @@ button {
 
 .titleHeader {
     @include flexCentering();
-    height: 3.5vw;
+    height: 2.8vw;
     border-bottom: $borderStyle;
     border-top: $borderStyle;
     background-color: $headersAndBtn;
@@ -91,14 +97,11 @@ button {
 .scoresNRoundsBox {
     width: 20vw;
     border-left: $borderStyle;
+    border-bottom: $borderStyle;
 }
 
 .roundContainer {
-    height: 40vh;
-}
-
-.scoresContainer {
-    height: 56vh;
+    height: 28vw;
 }
 
 .crupierCardsBox {
@@ -130,6 +133,7 @@ button {
     width: 30vw;
     margin: 0 auto;
     display: block;
+    font-size: 0.8vw;
 }
 
 .yourCardsBox {
@@ -146,6 +150,7 @@ button {
 .actionBtn {
     width: 24vw;
     height: 5vh;
+    font-size: 1em;
 }
 
 .actionBtnBox {
@@ -161,13 +166,17 @@ button {
 }
 
 .card {
-    width: 10vw;
-    height: 14vw;
+    width: 9vw;
+    height: 13vw;
+    // width: 10vw;
+    // height: 14vw;
 }
 
 .cardContainer {
-    width: 10vw;
-    height: 14vw;
+    width: 9vw;
+    height: 13vw;
+    // width: 10vw;
+    // height: 14vw;
     margin: 0 1vw;
     border-radius: 0.8vw;
     background-image: url('../assets/card_back.png');
@@ -180,7 +189,7 @@ button {
     }
 
     .titleHeader {
-        height: 3vw;
+        height: 2.9vw;
     }
 
     .cardContainer {

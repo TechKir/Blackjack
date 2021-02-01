@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React,{useEffect, useContext} from 'react';
 import GameHeader from './GameHeader';
 import PlayerInfoBox from './PlayerInfoBox';
 import classnames from 'classnames';
@@ -9,15 +9,33 @@ const GameArea = () => {
     const ls = window.localStorage;
     let apiRestart = false;
     let testIsWin = null; // TODO: is a temporary solution becouse there is some problem with isWin state - it is all about rendering rounds colums;
-    const {leftCash, setLeftCash, bet, setBet, isPlay, setIsPlay, round, setRound, setDoubleDown, isWin, setIsWin, rerender,setRerender}=useContext(AuthContext);
+    const {leftCash, setLeftCash, bet, setBet, isPlay, setIsPlay, round, setRound, setDoubleDown, isWin, setIsWin, rerender,setRerender}=useContext(AuthContext); 
 
-    //GETING DECKS FROM API AND SAVE THEM KEY TO LOCAL STORAGE - FOR THIS USAGE I PUT IT STIFFLY - DECK KEY:"I4T10VV791D3" VALID FOR 2 WEEKS.
-    // const getDecks = async () => {
-    //     await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
-    //         .then(res => res.json())
-    //         .then(data => ls.setItem('decksKey', JSON.stringify(data.deck_id)))   
-    // }
-    // getDecks();
+    //GET DECKS FROM API AND SAVE THEM KEY TO LOCAL STORAGE:
+    let deckId = JSON.parse(ls.getItem('deckId'));   
+    const getDecksId = async () => {
+        await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6')
+            .then(res => res.json())
+            .then(data => ls.setItem('deckId', JSON.stringify(data.deck_id)))   
+        deckId = JSON.parse(ls.getItem('deckId'));
+    };
+    if(deckId===null){
+        getDecksId();
+    };
+
+    //CHECK IS DECKID IS VALID. OTHERWISE GET NEW ID:
+    const checkDecksValidation = async () =>{
+        try{
+            await fetch(`https://deckofcardsapi.com/api/deck/${deckId}`)
+        }catch{
+            getDecksId(); 
+        }
+    };
+
+    useEffect(()=>{
+        checkDecksValidation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
 
     //COUNT VALUES MODULE FUNCTION:
     const countValues = (playerOrCroupierCards) => {
@@ -103,7 +121,7 @@ const GameArea = () => {
         setBet(result);
 
         //Resuffle cards:
-        await fetch('https://deckofcardsapi.com/api/deck/i4t10vv791d3/shuffle/')
+        await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/shuffle/`)
             .catch(err=>{
                 window.alert('CONNECTION FROM https://deckofcardsapi.com/ BROKES. SORRY, A GAME MUST BE RESTARTED...',err);     
                 apiRestart=true;    
@@ -113,7 +131,7 @@ const GameArea = () => {
         };
         
         //Starting cards for crupier:
-        await fetch('https://deckofcardsapi.com/api/deck/i4t10vv791d3/draw/?count=2')
+        await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
             .then(res => res.json())
             .then(data => ls.setItem('crupierCards', JSON.stringify(data.cards)))
             .catch(err=>{
@@ -125,7 +143,7 @@ const GameArea = () => {
         };
 
         //Starting cards for player:
-        await fetch('https://deckofcardsapi.com/api/deck/i4t10vv791d3/draw/?count=2')
+        await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
             .then(res => res.json())
             .then(data => ls.setItem('playerCards', JSON.stringify(data.cards)))
             .catch(err=>{
@@ -168,6 +186,9 @@ const GameArea = () => {
         } else if( typeof scoresHistory==='string'){
             JSON.parse(scoresHistory);
         };
+        //Save DecksId:
+        const actualDeckId = JSON.parse(ls.getItem('deckId'));
+
         ls.clear();
 
         ls.setItem('leftCash',1000);
@@ -176,7 +197,7 @@ const GameArea = () => {
         ls.setItem('doubleDown',false);
         ls.setItem('isPlay',false);
         ls.setItem('bet',0);
-
+        ls.setItem('deckId',JSON.stringify(actualDeckId))
         window.location.reload();
     }
 
@@ -197,7 +218,7 @@ const GameArea = () => {
         while(countValues('crupierCards')<=countValues('playerCards') && countValues('crupierCards')<=16){            
             while(countValues('crupierCards')<=16){
                 const croupierCards = JSON.parse(ls.getItem('crupierCards'));           
-                await fetch('https://deckofcardsapi.com/api/deck/i4t10vv791d3/draw/?count=1')
+                await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
                     .then(res => res.json())
                     .then(data => croupierCards.push(data.cards[0]))
                     // eslint-disable-next-line no-loop-func
@@ -216,8 +237,6 @@ const GameArea = () => {
         //Count who is winner: TODO: refactoring:
         const croupierResult = countValues('crupierCards');
         const playerResult = countValues('playerCards');
-        console.log('croupierResult',croupierResult)
-        console.log('playerResult',playerResult)
 
         if(croupierResult===playerResult){
             setLeftCash(leftCash+bet);
@@ -255,7 +274,7 @@ const GameArea = () => {
 
         //Takes 1 card:
         const playerCards = JSON.parse(ls.getItem('playerCards'));           
-        await fetch('https://deckofcardsapi.com/api/deck/i4t10vv791d3/draw/?count=1')
+        await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
             .then(res => res.json())
             .then(data => playerCards.push(data.cards[0]))
             .then(() => ls.setItem('playerCards', JSON.stringify(playerCards)))
@@ -288,7 +307,7 @@ const GameArea = () => {
     
     return (
         <div className='gameArea'>
-            <GameHeader title='Crupier'/>
+            <GameHeader title='Croupier'/>
             <div className='table'>
                 <div className={classnames('crupierCardsBox', { crupierCardsBoxVisible: !isPlay })}>
                     {JSON.parse(ls.getItem('crupierCards'))?.map( card => <div key={Math.random().toString(16)} className='cardContainer'><img key={card.id} className='card'  src={card.image} alt='card'></img></div>)}
