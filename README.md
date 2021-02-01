@@ -4,7 +4,7 @@
 3. and then: npm start
 
 # <h2>Live preview: </h2>
-https://keen-wilson-8a9f54.netlify.app
+https://amazing-mcnulty-73e06d.netlify.app
 
 # Getting Started with Create React App
 
