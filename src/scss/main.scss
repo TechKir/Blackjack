@@ -29,11 +29,21 @@ $borderStyle:2px solid $fontsAndBorders;
     margin: 0;
     padding: 0;
     font-family: 'Bevan', cursive;
+    cursor:url(../assets/cursor.png), auto;
 }
+
 
 body {
     font-size: 1vw;
+    //background to rotate phone if window orientation is "portrait-primary":
+    background-image: url('../assets/tool.png');
+    background-repeat: no-repeat;
+    background-size: 100px 100px;
+    background-attachment: fixed;
+    background-position: center center;
+    background-color: $rows;
 }
+
 
 .App {
     background-image: url('../assets/70-706654_ornamental-background.jpg');
@@ -166,21 +176,34 @@ button {
 }
 
 .card {
-    width: 9vw;
-    height: 13vw;
+    width: 8.6vw;
+    height: 12.6vw;
     // width: 10vw;
     // height: 14vw;
 }
 
 .cardContainer {
-    width: 9vw;
-    height: 13vw;
+    width: 8.6vw;
+    height: 12.6vw;
     // width: 10vw;
     // height: 14vw;
     margin: 0 1vw;
     border-radius: 0.8vw;
     background-image: url('../assets/card_back.png');
     background-size: cover;
+}
+
+.inVisible{
+    display: none;
+}
+
+.attribution{
+    font-size: 0.1rem;
+    padding: 0.2vw;
+    a{
+        text-decoration: none;
+        color:black
+    }
 }
 
 @media screen and(min-width:1540px) {
@@ -194,12 +217,12 @@ button {
 
     .cardContainer {
         width: 9vw;
-        height: 12vw;
+        height: 13vw;
     }
 
     .card {
         width: 9vw;
-        height: 12vw;
+        height: 13vw;
     }
 
     button {
