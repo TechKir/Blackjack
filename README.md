@@ -1,6 +1,6 @@
-# Black Jack
+# Blackjack
 ![Gamescreen](game.screen.png)
-This app is a standard BlackJack Game. Instruction on how to play can find here https://en.wikipedia.org/wiki/Blackjack. I created it using technologies such as like HTML5, CSS, SASS, JAVASCRIPT, ES6, REACT, and few libraries you can see on package.json file. Game use https://deckofcardsapi.com/ API to get all the cards.
+This app is a standard Blackjack Game. Instruction on how to play can find here https://en.wikipedia.org/wiki/Blackjack. I created it using technologies such as like HTML5, CSS, SASS, JAVASCRIPT, ES6, REACT, and few libraries you can see on package.json file. Game use https://deckofcardsapi.com/ API to get all the cards.
 
 # <h2>You can play this game by click below link: </h2>
 https://hopeful-bassi-b2e712.netlify.app/
